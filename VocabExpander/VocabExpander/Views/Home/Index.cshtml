@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<script src="~/Scripts/responsivevoice.js"></script>
+<script src="~/Scripts/jquery-3.1.1.js"></script>
+<!--<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>-->
+
+<br /><br />
+<select id="voiceselection"><option>US English Female</option></select> <br><br>
+
+<!--4 buttons-->
+<input onclick="play()" type="button" value="Play" />
+<input onclick="responsiveVoice.cancel();" type="button" value="Cancel" />
+<input onclick="responsiveVoice.pause();" type="button" value="Pause" />
+<input onclick="responsiveVoice.resume();" type="button" value="Resume" /><br><br>
+
+@Html.TextArea("model", null, new { id = "text", cols = "580", rows = "25", wrap = "virtual" })  
+
+<!--<textarea id="text" cols="350" rows="50"></textarea>--><br>
+
+
+
+<script type="text/javascript">
+
+    function play() {
+        responsiveVoice.speak($('#text').val(), $('#voiceselection').val());
+    }
+
+    //Populate voice selection dropdown
+    var voicelist = responsiveVoice.getVoices();
+    var vselect = $("#voiceselection");
+    $.each(voicelist, function () {
+        vselect.append($("<option />").val(this.name).text(this.name));
+    });
+</script>
